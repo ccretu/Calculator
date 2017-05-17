@@ -1,0 +1,237 @@
+<!DOCTYPE>
+<html onkeydown="uniKeyCode(event)">
+<body>
+	<style>
+        .keys{
+            margin: auto;
+            }
+            
+    </style>
+    <div>
+
+    <div class="keys">
+        <forum>
+			<button style =" width: 50px; height: 50px"id="Btn1"  onclick="myFunction1()"><strong>1</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn2"  onclick="myFunction2()"><strong>2</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn3"  onclick="myFunction3()"><strong>3</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn+"  onclick="plusFunction()"><strong>+</strong></button>
+			<br>
+			<button style =" width: 50px; height: 50px"id="Btn4"  onclick="myFunction4()"><strong>4</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn5"  onclick="myFunction5()"><strong>5</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn6"  onclick="myFunction6()"><strong>6</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn/"  onclick="divFunction()"><strong>/</strong></button>
+			<br>
+			<button style =" width: 50px; height: 50px"id="Btn7"  onclick="myFunction7()"><strong>7</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn8"  onclick="myFunction8()"><strong>8</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn9"  onclick="myFunction9()"><strong>9</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn-"  onclick="subFunction()"><strong>-</strong></button>
+			<br>
+			<button style =" width: 50px; height: 50px"id="Btnx"  onclick="expFunction()"><strong>x</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn0"  onclick="myFunction0()"><strong>0</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn="  onclick="equalsFunction()"><strong>=</strong></button>
+			<button style =" width: 50px; height: 50px"id="Btn*"  onclick="multFunction()"><strong>*</strong></button>
+		</forum>
+    </div>
+    
+	<input type="text" id="screen" disabled style="background-color: white">
+	<button style =" width: 50px; height: 50px"name="clear" onclick="clearFunction()">C</button>
+	</div>
+	
+	
+	
+<script>
+	var screenVal ="";
+	var total = 0;
+	var lastOP = "";
+	var count =0;
+	var prevKey;
+
+	function uniKeyCode(event) {
+    var key = event.keyCode;
+	if(key == 48 || key == 96)
+	{
+		document.getElementById("Btn0").click();
+	}
+	if(key == 49 || key == 97)
+	{
+		prevKey = 49;
+		document.getElementById("Btn1").click();
+	}
+	if(key == 50 || key == 98)
+	{
+		prevKey = 50;
+		document.getElementById("Btn2").click();
+	}
+	if(key == 51 || key == 99)
+	{
+		prevKey = 51;
+		document.getElementById("Btn3").click();
+	}
+	if(key == 52 || key == 100)
+	{
+		prevKey = 52;
+		document.getElementById("Btn4").click();
+	}
+	if(key == 53 || key == 101)
+	{
+		prevKey = 53;
+		document.getElementById("Btn5").click();
+	}
+	if(key == 54 || key == 102)
+	{
+		prevKey = 54;
+		document.getElementById("Btn6").click();
+	}
+	if(key == 55 || key == 103)
+	{
+		prevKey = 55;
+		document.getElementById("Btn7").click();
+	}
+	if(key == 56 || key == 104)
+	{
+		prevKey = 56;
+		document.getElementById("Btn8").click();
+	}
+	if(key == 57 || key == 105)
+	{
+		prevKey = 57;
+		document.getElementById("Btn9").click();
+	}
+	if(key == 187) //equals
+	{
+		prevKey = 187;
+		document.getElementById("Btn=").click();
+	}
+	if(key == 109) //dash
+	{
+		prevKey = 186;
+		document.getElementById("Btn-").click();
+	}
+	if(key == 111) //division
+	{
+		prevKey = 191;
+		document.getElementById("Btn/").click();
+	}
+	if(key == 107) //add
+	{
+		document.getElementById("Btn+").click();
+	}
+	if(key == 106) //mult
+	{
+		document.getElementById("Btn*").click();
+	}
+	
+}
+
+	function myFunction1(){
+		screenVal = screenVal + "1";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction2(){
+		screenVal = screenVal + "2";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction3(){
+		screenVal = screenVal + "3";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction4(){
+		screenVal = screenVal + "4";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction5(){
+		screenVal = screenVal + "5";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction6(){
+		screenVal = screenVal + "6";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction7(){
+		screenVal = screenVal + "7";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction8(){
+		screenVal = screenVal + "8";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction9(){
+		screenVal = screenVal + "9";
+		document.getElementById("screen").value = screenVal;
+	}
+	function myFunction0(){
+		screenVal = screenVal + "0";
+		document.getElementById("screen").value = screenVal;
+	}
+	function plusFunction(){
+		total = parseInt(screenVal) + total;
+		screenVal = "";
+		document.getElementById("screen").value = screenVal;
+		lastOP ="+";
+	}
+	function multFunction(){
+		if(count==0)
+		{
+			total = parseInt(screenVal);
+		}
+		else{
+			total = parseInt(screenVal) * total;
+		}
+		count = count +1;
+		screenVal = "";
+		document.getElementById("screen").value = screenVal;
+		lastOP ="*";
+	}
+	function divFunction(){
+		if(count==0)
+		{
+			total = parseInt(screenVal);
+		}
+		else{
+			total = total / parseInt(screenVal);
+		}
+		count = count +1;
+		screenVal = "";
+		document.getElementById("screen").value = screenVal;
+		lastOP="/";
+	}
+	function subFunction(){
+		if(count==0)
+		{
+			total = parseInt(screenVal);
+		}
+		else{
+			total = total - parseInt(screenVal);
+		}
+		count = count +1;
+		screenVal = "";
+		document.getElementById("screen").value = screenVal;
+		lastOP = "-";
+	}
+	function equalsFunction(){
+		if(lastOP=="+"){
+			total = parseInt(screenVal) + total;
+		}
+		if(lastOP=="-"){
+			total = total - parseInt(screenVal);
+		}
+		if(lastOP=="*"){
+			total = parseInt(screenVal) * total;
+		}
+		if(lastOP=="/"){
+			total = total / parseInt(screenVal);
+		}
+		document.getElementById("screen").value = total;
+	}
+	function clearFunction(){
+		total = 0;
+		count = 0;
+		lastOP = "";
+		screenVal ="";
+		document.getElementById("screen").value = screenVal;
+	}
+
+</script>
+
+</body>
+</html>
