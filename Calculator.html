@@ -7,7 +7,6 @@
             }
     </style>
     <div>
-
     <div class="keys">
         <forum>
 			<button style =" width: 50px; height: 50px"id="Btn1"  onclick="myFunction1()"><strong>1</strong></button>
@@ -31,18 +30,13 @@
 			<button style =" width: 50px; height: 50px"id="Btn*"  onclick="multFunction()"><strong>*</strong></button>
 		</forum>
     </div>
-    
 	<input type="text" id="screen" disabled style="background-color: white">
 	<button style =" width: 50px; height: 50px" id="clear" onclick="clearFunction()">C</button>
 	</div>
 	<br>
 	<br>
 	<br>
-	<button id="history" onclick="historyFunction()" ><strong>History</strong></button>
-	<p id = "textlog" style = "font-family: courier; background-color: lightgoldenrodyellow; width: 300px; height: 300px;">
-	<strong>History</strong><br>
-	</p>
-	
+	<p><strong>History</strong></p>
 	
 	
 <script>
@@ -51,8 +45,8 @@
 	var lastOP = "";
 	var count =0;
 	var prevKey;
-	var history ="";
-
+	var textlogy =null;
+	
 	function uniKeyCode(event) {
     var key = event.keyCode;
 	if(key == 48 || key == 96)
@@ -149,7 +143,6 @@
 		document.getElementById("screen").value = screenVal;
 	}
 }
-
 	function myFunction1(){
 		screenVal = screenVal + "1";
 		document.getElementById("screen").value = screenVal;
@@ -192,14 +185,14 @@
 	}
 	function plusFunction(){
 		total = parseInt(screenVal) + total;
-		history = screenVal+"+";
+		textlogy = screenVal+"+";
 		screenVal = "";
 		document.getElementById("screen").value = screenVal;
 		lastOP ="+";
 	}
-	function historyFunction() {
+	function textlogyFunction() {
       var oNewP = document.createElement("p");
-      var oText = document.createTextNode(history);
+      var oText = document.createTextNode(textlogy);
       oNewP.appendChild(oText);
       document.body.appendChild(oNewP);
    }
@@ -212,6 +205,7 @@
 			total = parseInt(screenVal) * total;
 		}
 		count = count +1;
+		textlogy = screenVal+"*";
 		screenVal = "";
 		document.getElementById("screen").value = screenVal;
 		lastOP ="*";
@@ -225,6 +219,7 @@
 			total = total / parseInt(screenVal);
 		}
 		count = count +1;
+		textlogy = screenVal+"/";
 		screenVal = "";
 		document.getElementById("screen").value = screenVal;
 		lastOP="/";
@@ -238,25 +233,30 @@
 			total = total - parseInt(screenVal);
 		}
 		count = count +1;
+		textlogy = screenVal+"-";
 		screenVal = "";
 		document.getElementById("screen").value = screenVal;
 		lastOP = "-";
 	}
 	function equalsFunction(){
 		if(lastOP=="+"){
-			history = history + screenVal;
+			textlogy = textlogy + screenVal;
 			total = parseInt(screenVal) + total;
 		}
 		if(lastOP=="-"){
+			textlogy = textlogy + screenVal;
 			total = total - parseInt(screenVal);
 		}
 		if(lastOP=="*"){
+			textlogy = textlogy + screenVal;
 			total = parseInt(screenVal) * total;
 		}
 		if(lastOP=="/"){
+			textlogy = textlogy + screenVal;
 			total = total / parseInt(screenVal);
 		}
 		document.getElementById("screen").value = total;
+		textlogyFunction();
 	}
 	function clearFunction(){
 		total = 0;
