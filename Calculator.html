@@ -5,7 +5,6 @@
         .keys{
             margin: auto;
             }
-            
     </style>
     <div>
 
@@ -34,8 +33,15 @@
     </div>
     
 	<input type="text" id="screen" disabled style="background-color: white">
-	<button style =" width: 50px; height: 50px"name="clear" onclick="clearFunction()">C</button>
+	<button style =" width: 50px; height: 50px" id="clear" onclick="clearFunction()">C</button>
 	</div>
+	<br>
+	<br>
+	<br>
+	<button id="history" onclick="historyFunction()" ><strong>History</strong></button>
+	<p id = "textlog" style = "font-family: courier; background-color: lightgoldenrodyellow; width: 300px; height: 300px;">
+	<strong>History</strong><br>
+	</p>
 	
 	
 	
@@ -45,6 +51,7 @@
 	var lastOP = "";
 	var count =0;
 	var prevKey;
+	var history ="";
 
 	function uniKeyCode(event) {
     var key = event.keyCode;
@@ -97,7 +104,7 @@
 		prevKey = 57;
 		document.getElementById("Btn9").click();
 	}
-	if(key == 187) //equals
+	if(key == 187 || key == 13) //equals
 	{
 		prevKey = 187;
 		document.getElementById("Btn=").click();
@@ -120,7 +127,27 @@
 	{
 		document.getElementById("Btn*").click();
 	}
-	
+	if(key == 67)
+	{
+		document.getElementById("clear").click();
+	}
+	if(key == 8 || key == 110)
+	{
+		if(screenVal.length >1)
+		{
+			var temp="";
+			for(i=0; i<=screenVal.length-2; i++)
+			{
+				temp = temp + screenVal[i];
+			}
+		screenVal = temp;
+		}
+		else if(screenVal.length == 1)
+		{
+			screenVal = "";
+		}
+		document.getElementById("screen").value = screenVal;
+	}
 }
 
 	function myFunction1(){
@@ -165,10 +192,17 @@
 	}
 	function plusFunction(){
 		total = parseInt(screenVal) + total;
+		history = screenVal+"+";
 		screenVal = "";
 		document.getElementById("screen").value = screenVal;
 		lastOP ="+";
 	}
+	function historyFunction() {
+      var oNewP = document.createElement("p");
+      var oText = document.createTextNode(history);
+      oNewP.appendChild(oText);
+      document.body.appendChild(oNewP);
+   }
 	function multFunction(){
 		if(count==0)
 		{
@@ -210,6 +244,7 @@
 	}
 	function equalsFunction(){
 		if(lastOP=="+"){
+			history = history + screenVal;
 			total = parseInt(screenVal) + total;
 		}
 		if(lastOP=="-"){
@@ -230,8 +265,6 @@
 		screenVal ="";
 		document.getElementById("screen").value = screenVal;
 	}
-
 </script>
-
 </body>
 </html>
