@@ -1,5 +1,6 @@
 <!DOCTYPE>
 <html onkeydown="uniKeyCode(event)">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <body>
 	<style>
         .keys{
@@ -7,43 +8,55 @@
             }
     </style>
     <div>
-    <div class="keys">
+    <div id = "dxy" class="keys">
         <forum>
 			<button style =" width: 50px; height: 50px"id="Btn1"  onclick="myFunction1()"><strong>1</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn2"  onclick="myFunction2()"><strong>2</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn3"  onclick="myFunction3()"><strong>3</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn+"  onclick="plusFunction()"><strong>+</strong></button>
+			<button style =" width: 50px; height: 50px" id="clear" onclick="clearFunction()"><strong>C</strong></button>
+			<button style =" width: 50px; height: 50px; font:3px;"id="Btn-"  onclick="tanFunction()"><strong>tan</strong></button>
 			<br>
 			<button style =" width: 50px; height: 50px"id="Btn4"  onclick="myFunction4()"><strong>4</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn5"  onclick="myFunction5()"><strong>5</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn6"  onclick="myFunction6()"><strong>6</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn/"  onclick="divFunction()"><strong>/</strong></button>
+			<button style =" width: 50px; height: 50px" id="ce" onclick="ceFunction()"><strong>CE</strong></button>
+			<button style =" width: 50px; height: 50px; font:3px;"id="Btn-"  onclick="piFunction()"><strong>pi</strong></button>
 			<br>
 			<button style =" width: 50px; height: 50px"id="Btn7"  onclick="myFunction7()"><strong>7</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn8"  onclick="myFunction8()"><strong>8</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn9"  onclick="myFunction9()"><strong>9</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn-"  onclick="subFunction()"><strong>-</strong></button>
+			<button style =" width: 50px; height: 50px; font:3px;"id="Btn-"  onclick="sinFunction()"><strong>sin</strong></button>
+			<button style =" width: 50px; height: 50px; font:3px;"id="Btn-"  onclick="logFunction()"><strong>log</strong></button>
 			<br>
 			<button style =" width: 50px; height: 50px"id="Btnx"  onclick="expFunction()"><strong>x</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn0"  onclick="myFunction0()"><strong>0</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn="  onclick="equalsFunction()"><strong>=</strong></button>
 			<button style =" width: 50px; height: 50px"id="Btn*"  onclick="multFunction()"><strong>*</strong></button>
+			<button style =" width: 50px; height: 50px; font:3px;"id="Btn-"  onclick="cosFunction()"><strong>cos</strong></button>
+			<button style =" width: 50px; height: 50px; font:3px;"id="Btn-"  onclick="lnFunction()"><strong>ln</strong></button>
 		</forum>
     </div>
-	<input type="text" id="screen" disabled style="background-color: white">
-	<button style =" width: 50px; height: 50px" id="clear" onclick="clearFunction()">C</button>
+	<br>
+	<input type="text" id="screen" disabled style="background-color: white; width:212px; border:1px solid black">
 	</div>
 	<br>
 	<br>
 	<br>
-	<p><strong>History</strong></p>
+	<body>
+	<h1><strong>History</strong></h1>
+	</body>
 	
 	
 <script>
 	var screenVal ="";
 	var total = 0;
+	var lastNum = null;
 	var lastOP = "";
 	var count =0;
+	var countPar=0;
 	var prevKey;
 	var textlogy =null;
 	
@@ -52,51 +65,61 @@
 	if(key == 48 || key == 96)
 	{
 		document.getElementById("Btn0").click();
+		lastNum = 0;
 	}
 	if(key == 49 || key == 97)
 	{
 		prevKey = 49;
 		document.getElementById("Btn1").click();
+		lastNum = 1;
 	}
 	if(key == 50 || key == 98)
 	{
 		prevKey = 50;
 		document.getElementById("Btn2").click();
+		lastNum = 2;
 	}
 	if(key == 51 || key == 99)
 	{
 		prevKey = 51;
 		document.getElementById("Btn3").click();
+		lastNum = 3;
 	}
 	if(key == 52 || key == 100)
 	{
 		prevKey = 52;
 		document.getElementById("Btn4").click();
+		lastNum = 4;
 	}
 	if(key == 53 || key == 101)
 	{
 		prevKey = 53;
 		document.getElementById("Btn5").click();
+		lastNum = 5;
 	}
 	if(key == 54 || key == 102)
 	{
 		prevKey = 54;
 		document.getElementById("Btn6").click();
+		lastNum = 6;
 	}
 	if(key == 55 || key == 103)
 	{
 		prevKey = 55;
 		document.getElementById("Btn7").click();
+		lastNum = 7;
 	}
 	if(key == 56 || key == 104)
 	{
 		prevKey = 56;
 		document.getElementById("Btn8").click();
+		lastNum = 8;
 	}
 	if(key == 57 || key == 105)
 	{
 		prevKey = 57;
 		document.getElementById("Btn9").click();
+		lastNum = 9;
 	}
 	if(key == 187 || key == 13) //equals
 	{
@@ -125,6 +148,10 @@
 	{
 		document.getElementById("clear").click();
 	}
+	if(key == 12)
+	{
+		document.getElementById("ce").click();
+	}
 	if(key == 8 || key == 110)
 	{
 		if(screenVal.length >1)
@@ -142,45 +169,78 @@
 		}
 		document.getElementById("screen").value = screenVal;
 	}
+	if(screenVal == "Claudiu"){
+
+	}
 }
 	function myFunction1(){
 		screenVal = screenVal + "1";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction2(){
 		screenVal = screenVal + "2";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction3(){
 		screenVal = screenVal + "3";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction4(){
 		screenVal = screenVal + "4";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction5(){
 		screenVal = screenVal + "5";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction6(){
 		screenVal = screenVal + "6";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction7(){
 		screenVal = screenVal + "7";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction8(){
 		screenVal = screenVal + "8";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction9(){
 		screenVal = screenVal + "9";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function myFunction0(){
 		screenVal = screenVal + "0";
+		if(lastOP=="sin"||lastOP=="cos"||lastOP=="tan"){
+			screenVal = screenVal + ")";
+		}
 		document.getElementById("screen").value = screenVal;
 	}
 	function plusFunction(){
@@ -191,10 +251,17 @@
 		lastOP ="+";
 	}
 	function textlogyFunction() {
+	  countPar = countPar + 1;
       var oNewP = document.createElement("p");
       var oText = document.createTextNode(textlogy);
       oNewP.appendChild(oText);
       document.body.appendChild(oNewP);
+
+	  if(countPar > 15)
+	{
+		var c = document.getElementsByTagName("P")[0];
+        c.remove();
+	}
    }
 	function multFunction(){
 		if(count==0)
@@ -238,24 +305,59 @@
 		document.getElementById("screen").value = screenVal;
 		lastOP = "-";
 	}
+	function sinFunction(){
+		count = count +1;
+		screenVal = "sin(";
+		document.getElementById("screen").value = screenVal;
+		lastOP = "sin";
+	}
 	function equalsFunction(){
 		if(lastOP=="+"){
 			textlogy = textlogy + screenVal;
 			total = parseInt(screenVal) + total;
+			textlogy = textlogy +"="+total;
+			total = 0;
+			count = 0;
+			lastOP = "";
+			screenVal ="";
 		}
 		if(lastOP=="-"){
 			textlogy = textlogy + screenVal;
 			total = total - parseInt(screenVal);
+			textlogy = textlogy +"="+total;
+			total = 0;
+			count = 0;
+			lastOP = "";
+			screenVal ="";
 		}
 		if(lastOP=="*"){
 			textlogy = textlogy + screenVal;
 			total = parseInt(screenVal) * total;
+			textlogy = textlogy +"="+total;
+			total = 0;
+			count = 0;
+			lastOP = "";
+			screenVal ="";
 		}
 		if(lastOP=="/"){
 			textlogy = textlogy + screenVal;
 			total = total / parseInt(screenVal);
+			textlogy = textlogy +"="+total;
+			total = 0;
+			count = 0;
+			lastOP = "";
+			screenVal ="";
 		}
-		document.getElementById("screen").value = total;
+		if(lastOP=="sin"){
+			textlogy = screenVal;
+			total = Math.sin(lastNum);
+			textlogy = textlogy +"="+total;
+			total = 0;
+			count = 0;
+			lastOP = "";
+			screenVal ="";
+		}
+		document.getElementById("screen").value = screenVal;
 		textlogyFunction();
 	}
 	function clearFunction(){
@@ -265,6 +367,21 @@
 		screenVal ="";
 		document.getElementById("screen").value = screenVal;
 	}
+
+	function ceFunction(){
+		total = 0;
+		count = 0;
+		lastOP = "";
+		screenVal ="";
+		document.getElementById("screen").value = screenVal;
+		var x = countPar;
+		for(i = 0; i<x; i++){
+			countPar = countPar - 1;
+			var c = document.getElementsByTagName("P")[0];
+            c.remove();
+		}
+	}
+
 </script>
 </body>
 </html>
